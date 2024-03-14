@@ -69,19 +69,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     subjectsMarks: {
       type:DataTypes.TEXT,
-    
-
     },
     subjectsGrade: {
       type:DataTypes.TEXT,
-   
-
     },
     subjectsPer: {
       type:DataTypes.TEXT,
-
-
     },
+    overallGrade: {
+      type:DataTypes.STRING,
+    },
+    overallPer: {
+      type:DataTypes.STRING,
+    }
   }, {
     sequelize,
     modelName: 'user',

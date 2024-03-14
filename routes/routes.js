@@ -14,6 +14,9 @@ router.post('/addStudentMarks',management.updateStudentMarks);
 router.get('/delete',management.deleteStudent);
 router.post('/delete',management.deleteStudentRecord);
 
-router.get('/search',management.deleteStudent);
+router.get('/search',management.search);
+router.post('/searchStudent',management.searchStudent);
+
+router.get('/filter',management.filter);
 
 module.exports = router;

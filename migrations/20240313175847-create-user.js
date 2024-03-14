@@ -71,6 +71,12 @@ module.exports = {
   
   
       },
+      overallGrade: {
+        type:DataTypes.STRING,
+      },
+      overallPer: {
+        type:DataTypes.STRING,
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE
