@@ -210,3 +210,75 @@ module.exports.home = (req, res) => {
             console.log(error);
           }
           }
+          module.exports.filterStudent = async(req, res) => {
+            try {
+              const grade=req.body.grade;
+              const perMx=req.body.perMx;
+              const perMn=req.body.perMn;
+              var flag=false;
+              if(perMx && perMn) flag=true;
+
+              const students = await user.findAll();
+              var users=[];
+              students.forEach(student => {
+                if(flag &&student.dataValues.overallPer<=perMx && student.dataValues.overallPer>=perMn )users.push(student.dataValues);
+                if(student.dataValues.overallGrade === grade)users.push(student.dataValues);
+              })
+
+              res.render("students",{users});
+            } catch (error) {
+              console.log(error);
+            }
+            }
+
+            module.exports.bonus = async(req, res) => {
+              try {
+                res.render("bonus");
+              } catch (error) {
+                console.log(error);
+              }
+              }
+              module.exports.avgClass = async(req, res) => {
+                try {
+                  className=req.body.className;
+                  const students = await user.findAll();
+                  var sum=0;
+                  var count=0;
+              students.forEach(student => {
+                if(student.dataValues.className === className)
+                {
+                  sum=+parseFloat(student.dataValues.overallPer);
+                  count++;
+                }
+              })
+              const avg=(sum/count).toFixed(2);
+              res.send(avg); 
+                } catch (error) {
+                  console.log(error);
+                }
+                }
+                module.exports.avgMarks = async(req, res) => {
+                  try {
+                    studentID=req.body.studentID;
+                    const students = await user.findOne({where:{studentID}});
+
+                    var sumO=0;
+                    var sumF=0;
+                    var count=0;
+                    const marksList=JSON.parse(students.dataValues.subjectsMarks)
+                    marksList.forEach(mark => {
+                      count++;
+                      sumO+=parseFloat(mark[0]);
+                      sumF+=parseFloat(mark[1]);
+                })
+                const avgO=(sumO/count).toFixed(2);
+                const avgF=(sumF/count).toFixed(2);
+
+                res.send({
+                  "Obtained Average Marks": avgO,
+                  "Full Average Marks": avgF
+                }); 
+                  } catch (error) {
+                    console.log(error);
+                  }
+                  }

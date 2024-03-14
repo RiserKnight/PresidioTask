@@ -18,5 +18,10 @@ router.get('/search',management.search);
 router.post('/searchStudent',management.searchStudent);
 
 router.get('/filter',management.filter);
+router.post('/filterStudent',management.filterStudent);
+
+router.get('/bonus',management.bonus);
+router.post('/avgClass',management.avgClass);
+router.post('/avgMarks',management.avgMarks);
 
 module.exports = router;
